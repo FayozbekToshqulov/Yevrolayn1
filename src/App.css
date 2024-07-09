@@ -1,0 +1,15 @@
+.home_bg{
+    background-image: url('https://www.sammobile.com/wp-content/uploads/2018/02/Galaxy-s9-wallpaper-5.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.active{
+    color: #facc15;
+}
+.dashboard-bg{
+    background-image: url('https://www.sammobile.com/wp-content/uploads/2018/02/Galaxy-s9-wallpaper-5.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: inherit;
+}
