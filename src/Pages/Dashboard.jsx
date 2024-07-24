@@ -1,11 +1,8 @@
 import { db } from "../firebase";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
 import { notification } from 'antd';
-import { AuthContext } from "../context/AuthContext";
-import { IoIosLogOut } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [blog, setBlog] = useState([]);
@@ -15,8 +12,6 @@ const Dashboard = () => {
   const [price, setPrice] = useState('');
   const [show, setShow] = useState(true);
   const [id, setId] = useState('');
-  const { dispatch } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const dataBase = collection(db, 'blogs');
@@ -51,7 +46,7 @@ const Dashboard = () => {
 
       notification.success({
         message: "Ma'lumotlar yuborildi",
-        description: "Bir doim xizmatingizdamiz taxsir",
+        description: "",
       });
 
       setTitle("");
@@ -86,14 +81,10 @@ const Dashboard = () => {
     setPrice("");
   };
 
-  const logOut = () => {
-    dispatch({ type: "LOGOUT", payload: null });
-    navigate('/login');
-  };
-
   return (
     <div className="container mx-auto p-4 dashboard-bg">
-      <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col m-auto w-full mt-10 md:mt-0">
+      <h1 className="mt-32"></h1>
+      <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col m-auto w-full md:mt-0">
         <div className="relative mb-4">
           <label htmlFor="title" className="leading-7 text-sm text-gray-600">Nomi</label>
           <input
@@ -126,30 +117,38 @@ const Dashboard = () => {
             <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700" onClick={handleUpdate}>Update</button>
           )}
         </div>
-        <button onClick={logOut} className="mt-4 text-blue-700 text-[30px] border-0 py-2 px-8 m-auto focus:outline-none"><IoIosLogOut /></button>
       </div>
 
       <section className="text-gray-400 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4">
-            {blog.map(data => (
-              <div key={data.id} className="p-4 lg:w-1/4 md:w-1/2">
-                <div className="h-full flex flex-col items-center text-center">
-                  <img alt="team" className="flex-shrink-0 rounded-lg w-full h-56 object-cover object-center mb-4" src={data.img} />
-                  <div className="w-full">
-                    <h2 className="title-font font-medium text-lg text-white">{data.title}</h2>
-                    <p className="mb-4">{data.descript}</p>
-                    <div className="flex justify-between">
-                      <p className="mb-4">{data.price} so'm</p>
-                    </div>
-                    <div className="items-center flex-wrap m-auto">
+            <table className="min-w-full bg-white">
+              <thead>
+                <tr>
+                  <th className="py-2">Image</th>
+                  <th className="py-2">Title</th>
+                  <th className="py-2">Description</th>
+                  <th className="py-2">Price</th>
+                  <th className="py-2">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {blog.map(data => (
+                  <tr key={data.id} className="bg-gray-100 border-b text-black">
+                    <td className="py-2">
+                      <img alt="team" className="flex-shrink-0 rounded-lg w-20 h-20 object-cover object-center mb-4" src={data.img} />
+                    </td>
+                    <td className="py-2">{data.title}</td>
+                    <td className="py-2">{data.descript}</td>
+                    <td className="py-2">{data.price} $</td>
+                    <td className="py-2">
                       <button className="border px-4 py-2 mr-2 bg-blue-600 text-center text-white rounded-md hover:bg-blue-700" onClick={() => handleEdit(data.id, data.title, data.descript, data.price, data.img)}>Update</button>
                       <button className="border px-4 py-2 bg-red-600 text-center text-white rounded-md hover:bg-red-700" onClick={() => handleDelete(data.id)}>Delete</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
