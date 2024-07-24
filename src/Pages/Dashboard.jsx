@@ -2,7 +2,11 @@ import { db } from "../firebase";
 import { useState, useEffect } from "react";
 import { collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
+import { MdDelete } from "react-icons/md";
+import { TiEdit } from "react-icons/ti";
 import { notification } from 'antd';
+import { Link } from "react-router-dom";
+import { IoIosArrowForward } from 'react-icons/io'
 
 const Dashboard = () => {
   const [blog, setBlog] = useState([]);
@@ -142,8 +146,8 @@ const Dashboard = () => {
                     <td className="py-2">{data.descript}</td>
                     <td className="py-2">{data.price} $</td>
                     <td className="py-2">
-                      <button className="border px-4 py-2 mr-2 bg-blue-600 text-center text-white rounded-md hover:bg-blue-700" onClick={() => handleEdit(data.id, data.title, data.descript, data.price, data.img)}>Update</button>
-                      <button className="border px-4 py-2 bg-red-600 text-center text-white rounded-md hover:bg-red-700" onClick={() => handleDelete(data.id)}>Delete</button>
+                      <button className="border px-4 py-2 mr-2 bg-blue-600 text-center text-white rounded-md hover:bg-blue-700" onClick={() => handleEdit(data.id, data.title, data.descript, data.price, data.img)}><TiEdit /></button>
+                      <button className="border px-4 py-2 bg-red-600 text-center text-white rounded-md hover:bg-red-700" onClick={() => handleDelete(data.id)}><MdDelete /></button>
                     </td>
                   </tr>
                 ))}

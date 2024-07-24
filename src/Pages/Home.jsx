@@ -5,8 +5,9 @@ import { FaRegHeart } from "react-icons/fa";
 import TelegramForm from "./Telegram";
 import { notification } from 'antd';
 import { TbShoppingBagPlus } from "react-icons/tb";
+import Footer from "./Footer";
 
-const Home = () => {
+const Home = ({count, setCount}) => {
   const [blog, setBlog] = useState([]);
   const [retryCount, setRetryCount] = useState(0);
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
@@ -120,7 +121,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <TelegramForm />
+      <Footer />
     </div>
   );
 };

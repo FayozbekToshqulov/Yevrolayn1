@@ -14,7 +14,6 @@ import { FaRegHeart } from "react-icons/fa";
 import { Sevimli } from './Pages/Sevimli';
 import { BsTelephone } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
-import { IoSearch } from "react-icons/io5";
 import { IoCloseSharp } from "react-icons/io5";
 import { ProtectRouteAdmin } from './protectedRoutes/ProtectRouteAdmin';
 import { IoIosLogOut } from "react-icons/io";
@@ -25,6 +24,7 @@ function App() {
   const { currentUser } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [count, setCount] = useState(0)
 
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to='/signin' />;
@@ -33,7 +33,7 @@ function App() {
   const handleTel = () => {
     const confirmCall = window.confirm("Biz bilan bog'laning");
     if (confirmCall) {
-      window.location.href = "tel:+998971287877";
+      window.location.href = "tel:+998883276060";
     }
   };
 
@@ -57,25 +57,26 @@ function App() {
         <div className="bg-gray-800 fixed w-full z-50">
           <div className="w-full mx-auto flex flex-wrap p-5 justify-between items-center">
             <div className='flex'>
-              <div className='text-[28px] mr-5'>
+              <div className='text-[28px]  mr-5'>
                 <FaBars onClick={toggleMenu} />
               </div>
               <NavLink className="mr-5 font-bold text-[20px] hover:text-yellow-400" to="/">
                 <img src={logo} alt="logo" className='max-w-40 mr-7' />
               </NavLink>
             </div>
-            <div className='flex'>
-              <BsTelephone className="mr-3 inline-block font-bold text-[25px] hover:text-yellow-400 text-center" onClick={handleTel} />
-              <NavLink className="mr-3 inline-block font-bold text-[25px] hover:text-yellow-400 text-center" to="/sevimli">
+            <div className='flex sm: '>
+              <BsTelephone className="mr-3 inline-block font-bold text-[25px] ease-in duration-300  hover:text-yellow-400 text-center" onClick={handleTel} />
+              <NavLink className="mr-3 inline-block font-bold text-[25px] ease-in duration-300 hover:text-yellow-400 text-center" to="/sevimli">
                 <FaRegHeart />
               </NavLink>
-              <NavLink className="mr-3 inline-block font-bold text-[25px] hover:text-yellow-400" to="/savatcha">
+              <NavLink className="mr-3 inline-block font-bold text-[25px] ease-in duration-300 hover:text-yellow-400 relative" to="/savatcha">
+                <small className='text-blue-600 absolute top-0 right-0 text-[15px] font-bold transform translate-x-1/2 -translate-y-1/2'>{count}</small>
                 <MdOutlineShoppingCart />
               </NavLink>
-              {!user && <NavLink className="mr-3 inline-block font-bold text-[25px] hover:text-yellow-400" to="/signin">
+              {!user && <NavLink className="mr-3 inline-block font-bold text-[25px] ease-in duration-300 hover:text-yellow-400" to="/signin">
                 <PiSignInBold />
               </NavLink>}
-              <NavLink className="mr-5 font-bold text-[25px] hover:text-yellow-400" to="/dashboard">
+              <NavLink className="mr-5 font-bold text-[25px] ease-in duration-300 hover:text-yellow-400" to="/dashboard">
                 <VscAccount />
               </NavLink>
               {user && <button onClick={logOut} className="mr-5 font-bold text-[25px] hover:text-yellow-400"><IoIosLogOut /></button>}
@@ -106,7 +107,7 @@ function App() {
 
 
       <Routes>
-        <Route element={<Home searchTerm={searchTerm} />} path='/' />
+        <Route element={<Home count={count} setCount={setCount} searchTerm={searchTerm} />} path='/' />
         <Route element={<SignIn />} path='/signin' />
         <Route element={<ProtectRouteAdmin><Dashboard /></ProtectRouteAdmin>} path='/dashboard' />
         <Route element={<AddToCard />} path='/savatcha' />
