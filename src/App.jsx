@@ -18,40 +18,31 @@ import { IoCloseSharp } from "react-icons/io5";
 import { ProtectRouteAdmin } from './protectedRoutes/ProtectRouteAdmin';
 import { IoIosLogOut } from "react-icons/io";
 
-
-
 function App() {
   const { currentUser } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [count, setCount] = useState(0)
-
-
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to='/signin' />;
   };
-
   const handleTel = () => {
     const confirmCall = window.confirm("Biz bilan bog'laning");
     if (confirmCall) {
       window.location.href = "tel:+998883276060";
     }
   };
-
   const toggleMenu = () => {
     setShow(!show);
     const root = document.getElementsByTagName("html")[0];
     root.style.overflowY = show ? "auto" : "hidden";
   };
   let user = localStorage.getItem('users')
-
   const logOut = () => {
     localStorage.removeItem('users');
     window.location.reload();
     <Navigate to={'/'} />
   };
-
-
   return (
     <>
       <header className="text-white body-font bg-gray-800">
@@ -104,8 +95,6 @@ function App() {
           </div>
         </Fragment>
       )}
-
-
 
       <Routes>
         <Route element={<Home count={count} setCount={setCount} searchTerm={searchTerm} />} path='/' />

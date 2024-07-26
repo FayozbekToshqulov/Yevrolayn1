@@ -120,8 +120,6 @@ function AddToCard() {
         }
       );
       console.log(response.data);
-
-      // Clear localStorage after successful submission
       localStorage.removeItem('cards');
       window.location.reload();
     } catch (error) {
@@ -176,7 +174,6 @@ function AddToCard() {
                     <img className="w-[10%] h-[10%]" src={item.img} alt="" />
                     <b className="w-[10%] text-[12px] ml-[-5%] text-center">{item.name}</b>
                     <p className="">{item.price} $</p>
-
                     <div className="w-16 text-[22px] text-center flex items-center justify-center">
                       <FaMinus className="cursor-pointer" onClick={() => handleDecrement(index)} />
                       <p className="w-16 text-center">{item.piece}</p>
