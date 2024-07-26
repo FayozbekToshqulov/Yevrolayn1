@@ -25,6 +25,7 @@ function App() {
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [count, setCount] = useState(0)
+  
 
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to='/signin' />;
@@ -87,22 +88,22 @@ function App() {
       </header>
 
       {show && (
-        <Fragment>
-          <div onClick={toggleMenu} className='w-full h-full bg-[rgba(0,0,0,.5)] fixed top-0 left-0 z-40'></div>
-          <div className='fixed top-0 left-0 w-[250px] h-full bg-white shadow-md z-50'>
-            <div className='flex justify-end p-4'>
-              <IoCloseSharp className='text-[28px]' onClick={toggleMenu} />
-            </div>
-            <nav className='flex flex-col items-start p-4'>
-              <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/" onClick={toggleMenu}>Home</NavLink>
-              <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/sevimli" onClick={toggleMenu}>Sevimli</NavLink>
-              <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/savatcha" onClick={toggleMenu}>Savatcha</NavLink>
-              <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/signin" onClick={toggleMenu}>Sign In</NavLink>
-              <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/dashboard" onClick={toggleMenu}>Dashboard</NavLink>
-            </nav>
-          </div>
-        </Fragment>
-      )}
+  <Fragment>
+    <div onClick={toggleMenu} className='w-full h-full bg-[rgba(0,0,0,.5)] fixed top-0 left-0 z-40 transition-opacity duration-300 opacity-100'></div>
+    <div className='fixed top-0 left-0 w-[250px] h-full bg-white shadow-md z-50 transition-transform duration-300 transform translate-x-0'>
+      <div className='flex justify-end p-4'>
+        <IoCloseSharp className='text-[28px]' onClick={toggleMenu} />
+      </div>
+      <nav className='flex flex-col items-start p-4'>
+        <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/" onClick={toggleMenu}>Home</NavLink>
+        <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/sevimli" onClick={toggleMenu}>Sevimli</NavLink>
+        <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/savatcha" onClick={toggleMenu}>Savatcha</NavLink>
+        <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/signin" onClick={toggleMenu}>Sign In</NavLink>
+        <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/dashboard" onClick={toggleMenu}>Dashboard</NavLink>
+      </nav>
+    </div>
+  </Fragment>
+)}
 
 
 
