@@ -202,8 +202,7 @@ function AddToCard() {
               <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
                 <div className="bg-white p-8 rounded-lg flex flex-col max-w-md w-full">
                   <h2 className="text-2xl font-bold mb-4">
-                    <span className="text-red-500 text-[18px]">Iltimos!</span>
-                    <p className="text-blue-500">Ma'lumotlarni to'liq va tushunarli kiriting...</p>
+                    <p className="text-blue-500">Ma'lumotlarni to'liq va aniq kiriting</p>
                   </h2>
                   <input
                     type="text"
@@ -247,17 +246,17 @@ function AddToCard() {
                   />
                   <div className="flex justify-end">
                     <button
-                      className="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded mr-2"
+                      className="text-gray-600 bg-white border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded mr-2"
                       onClick={closeModal}
                     >
-                      Close
+                      Yopish
                     </button>
                     <button
                       className="text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
                       type="submit"
                       onClick={handleSubmit}
                     >
-                      Submit
+                      Jo'natish
                     </button>
                   </div>
                 </div>

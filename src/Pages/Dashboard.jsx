@@ -85,6 +85,8 @@ const Dashboard = () => {
     setPrice("");
   };
 
+
+
   return (
     <div className="container mx-auto p-4 dashboard-bg">
       <h1 className="mt-32"></h1>
@@ -122,6 +124,13 @@ const Dashboard = () => {
           )}
         </div>
       </div>
+      <button
+                      className="text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
+                      type="submit"
+                      // onClick={handleSubmit}
+                    >
+                      New
+                    </button>
 
       <section className="text-gray-400 body-font">
         <div className="container px-5 py-24 mx-auto">
