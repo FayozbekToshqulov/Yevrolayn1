@@ -16,34 +16,56 @@ import { BsTelephone } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
 import { IoCloseSharp } from "react-icons/io5";
 import { ProtectRouteAdmin } from './protectedRoutes/ProtectRouteAdmin';
-import { IoIosLogOut } from "react-icons/io";
-
+import { IoIosLogOut, IoIosArrowUp } from "react-icons/io";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [showScroll, setShowScroll] = useState(false); // State for arrow visibility
+
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to='/signin' />;
   };
+
   const handleTel = () => {
     const confirmCall = window.confirm("Biz bilan bog'laning");
     if (confirmCall) {
       window.location.href = "tel:+998883276060";
     }
   };
+
   const toggleMenu = () => {
     setShow(!show);
     const root = document.getElementsByTagName("html")[0];
     root.style.overflowY = show ? "auto" : "hidden";
   };
-  let user = localStorage.getItem('users')
+
+  let user = localStorage.getItem('users');
+
   const logOut = () => {
     localStorage.removeItem('users');
     window.location.reload();
-    <Navigate to={'/'} />
+    <Navigate to={'/'} />;
   };
+
+  // Handle scroll event to show or hide the arrow
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScroll(window.scrollY > 200);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Function to scroll to the top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <header className="text-white body-font bg-gray-800">
@@ -69,11 +91,10 @@ function App() {
               {!user && <NavLink className="mr-3 inline-block font-bold text-[25px] ease-in duration-300 hover:text-yellow-400" to="/signin">
                 <PiSignInBold />
               </NavLink>}
-              <NavLink className="mr-5 font-bold text-[25px] ease-in duration-300 hover:text-yellow-400" to="/dashboard">
+              {user && <NavLink className="mr-5 font-bold text-[25px] ease-in duration-300 hover:text-yellow-400" to="/dashboard">
                 <VscAccount />
-              </NavLink>
+              </NavLink>}
               {user && <button onClick={logOut} className="mr-5 font-bold text-[25px] hover:text-yellow-400"><IoIosLogOut /></button>}
-
             </div>
           </div>
         </div>
@@ -87,11 +108,12 @@ function App() {
               <IoCloseSharp className='text-[28px]' onClick={toggleMenu} />
             </div>
             <nav className='flex flex-col items-start p-4'>
-              <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/" onClick={toggleMenu}>Home</NavLink>
+              <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/" onClick={toggleMenu}>Asosiy</NavLink>
               <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/sevimli" onClick={toggleMenu}>Sevimli</NavLink>
               <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/savatcha" onClick={toggleMenu}>Savatcha</NavLink>
-              <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/signin" onClick={toggleMenu}>Sign In</NavLink>
-              <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/dashboard" onClick={toggleMenu}>Dashboard</NavLink>
+              {!user && <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/signin" onClick={toggleMenu}>Sign In</NavLink>}
+              {user && <NavLink className="mb-4 text-gray-700 hover:text-yellow-400" to="/dashboard" onClick={toggleMenu}>Admin panel</NavLink>}
+              {user && <button onClick={logOut} className="mb-4 text-gray-700 hover:text-yellow-400">Chiqish</button>}
             </nav>
           </div>
         </Fragment>
@@ -104,6 +126,13 @@ function App() {
         <Route element={<AddToCard />} path='/savatcha' />
         <Route element={<Sevimli />} path='/sevimli' />
       </Routes>
+
+      {/* Scroll to top arrow */}
+      {showScroll && (
+        <div onClick={scrollToTop} className="fixed bottom-24 right-10 bg-orange-600 text-white p-3 rounded-full cursor-pointer shadow-lg">
+          <IoIosArrowUp size={28} />
+        </div>
+      )}
     </>
   );
 }

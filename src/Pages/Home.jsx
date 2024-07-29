@@ -132,11 +132,12 @@ const Home = ({ count, setCount }) => {
               <div key={data.id} className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center border-[2px] p-3 rounded-lg">
                   <img alt="rasm bor" className="p-0 w-full h-full object-cover object-center mb-4" src={data.img} />
+                  <div className="w-full border-2 border-[black] mb"></div>
                   <div className="w-full">
                     <h2 className="title-font font-mono text-lg text-gray-500">{data.title}</h2>
                     <p className="mb-4 text-black hover:text-yellow-600">{data.descript}</p>
                     <div className="flex items-center justify-around">
-                      <p className="text-black">{data.price} $</p>
+                      <p className="text-black">{data.price} so'm</p>
                       <span className="inline-flex">
                         <a className="text-gray-700 text-[20px] hover:text-red-600 transition duration-300 cursor-pointer">
                           <FaRegHeart className="text-blue-800 text-[23px]" />

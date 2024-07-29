@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import axios from 'axios';
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import { notification } from "antd";
-
 
 function AddToCard() {
   const [web, setWeb] = useState([]);
@@ -150,53 +149,58 @@ function AddToCard() {
     <>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
-          <div className="flex  flex-col text-center w-full mb-20">
+          <div className="flex flex-col text-center w-full mb-20">
             <div className="flex m-auto items-center">
               <Link to={"/"}><span className="text-[30px] ease-in duration-300 hover:text-orange-600">Bosh sahifa</span></Link> <IoIosArrowForward className="text-[30px] text-gray-800" /> <span className="text-[30px] text-orange-600">Savatcha</span>
             </div>
           </div>
-          <div className="lg:w-2/3 w-full mx-auto overflow-auto">
-            <div>
-              <hr className="border-black mb-3" />
-              <div className="flex justify-between mx-3">
-                <h1>Img</h1>
-                <h1>Name</h1>
-                <h1>Price</h1>
-                <h1>Piece</h1>
-                <h1>Delete</h1>
-              </div>
-              <hr className="border-black mt-3" />
-            </div>
-            <div className=" flex flex-col">
-              {web.length > 0 ? web.map((item, index) => (
-                <Fragment key={index}>
-                  <div className="mt-3 w-[100%] flex justify-between items-center mb-3">
-                    <img className="w-[10%] h-[10%]" src={item.img} alt="" />
-                    <b className="w-[10%] text-[12px] ml-[-5%] text-center">{item.name}</b>
-                    <p className="">{item.price} $</p>
-                    <div className="w-16 text-[22px] text-center flex items-center justify-center">
-                      <FaMinus className="cursor-pointer" onClick={() => handleDecrement(index)} />
-                      <p className="w-16 text-center">{item.piece}</p>
-                      <FaPlus className="cursor-pointer" onClick={() => handleIncrement(index)} />
-                    </div>
-                    <MdDelete className="text-[25px] text-blue-500 w-16 text-center cursor-pointer" onClick={() => handleDelete(index)} />
-                  </div>
-                </Fragment>
-              )) : (
-
-                <div className="p-[40px] text-center">
-                  <h1 className="text-[30px] mb-2">🛒</h1>
-                  <p className="text-[20px] mb-2">Sizning savatingiz bo'sh</p>
-                  <p>O'zingizga yoqqan mahsulotlarni veb-sayt savatga qo'shishingiz mumkin.</p>
-                </div>
-              )
-
-              }
-            </div>
+          <div className="lg:w-2/3 w-full mx-auto overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Img</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Piece</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delete</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {web.length > 0 ? web.map((item, index) => (
+                  <Fragment key={index}>
+                    <tr className="hover:bg-gray-100">
+                      <td className=""><img className="w-20 h-20" src={item.img} alt="" /></td>
+                      <td className="px-6 py-4 text-sm text-gray-500">{item.name}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.price} $</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div className="flex items-center">
+                          <FaMinus className="cursor-pointer" onClick={() => handleDecrement(index)} />
+                          <p className="mx-2 text-base">{item.piece}</p>
+                          <FaPlus className="cursor-pointer" onClick={() => handleIncrement(index)} />
+                        </div>
+                      </td>
+                      <td className="px-6  py-4 whitespace-nowrap text-[30px] font-medium text-blue-600 cursor-pointer">
+                        <MdDelete onClick={() => handleDelete(index)} />
+                      </td>
+                    </tr>
+                  </Fragment>
+                )) : (
+                  <tr>
+                    <td colSpan="5" className="px-6 py-4 text-center text-lg text-gray-500">
+                      <div className="p-40">
+                        <h1 className="text-4xl mb-2">🛒</h1>
+                        <p className="text-2xl mb-2">Sizning savatingiz bo'sh</p>
+                        <p>O'zingizga yoqqan mahsulotlarni veb-sayt savatga qo'shishingiz mumkin.</p>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
           <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
             <div>
-              <h1 className="text-blue-500 text-[20px]">Jami narxi: <span className=" text-black">{cost} $</span></h1>
+              <h1 className="text-blue-500 text-2xl">Jami narxi: <span className="text-black">{cost} $</span></h1>
             </div>
             {show ? (
               <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
@@ -274,7 +278,7 @@ function AddToCard() {
         </div>
       </section>
     </>
-  )
+  );
 }
 
-export default AddToCard
+export default AddToCard;
