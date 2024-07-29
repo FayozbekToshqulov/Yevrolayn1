@@ -18,7 +18,7 @@ const ImageSlider = () => {
   }, []);
 
   return (
-    <div className="bg-blue-600 h-[100vh] bg-no-repeat bg-cover bg-center py-24">
+    <div className="bg-blue-600 h-[90vh] bg-no-repeat bg-cover bg-center py-16">
       <div className="container mx-auto flex justify-around h-full">
         <div className="mt-20 p-10">
           <h1 className="text-white text-[30px] md:text-[45px] sm:text-[40px]">

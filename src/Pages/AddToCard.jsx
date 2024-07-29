@@ -187,7 +187,7 @@ function AddToCard() {
                 )) : (
                   <tr>
                     <td colSpan="5" className="px-6 py-4 text-center text-lg text-gray-500">
-                      <div className="p-40">
+                      <div className="p-30">
                         <h1 className="text-4xl mb-2">🛒</h1>
                         <p className="text-2xl mb-2">Sizning savatingiz bo'sh</p>
                         <p>O'zingizga yoqqan mahsulotlarni veb-sayt savatga qo'shishingiz mumkin.</p>
