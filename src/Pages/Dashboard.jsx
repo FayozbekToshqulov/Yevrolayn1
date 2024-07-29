@@ -169,7 +169,7 @@ const Dashboard = () => {
                     </td>
                     <td className="py-2">{data.title}</td>
                     <td className="py-2">{data.descript}</td>
-                    <td className="py-2">{data.price} $</td>
+                    <td className="py-2">{data.price} so'm</td>
                     <td className="py-2">
                       <button className="border px-4 py-2 mr-2 bg-blue-600 text-center text-white rounded-md hover:bg-blue-700" onClick={() => handleEdit(data.id, data.title, data.descript, data.price, data.img)}><TiEdit /></button>
                       <button className="border px-4 py-2 bg-red-600 text-center text-white rounded-md hover:bg-red-700" onClick={() => handleDelete(data.id)}><MdDelete /></button>
